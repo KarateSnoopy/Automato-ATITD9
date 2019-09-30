@@ -5,16 +5,16 @@
 dofile("common.inc");
 dofile("settings.inc");
 
-NW = makePoint(45, 60);
-NE = makePoint(75, 62);
-SW = makePoint(45, 87);
-SE = makePoint(75, 91);
-N = makePoint(59, 51);
-S = makePoint(60, 98);
-E = makePoint(84, 74);
-W = makePoint(37, 75);
-BuildButton = makePoint(30, 135);
-CancelButton = makePoint(85, 135);
+NW = makePoint(46, 65);
+NE = makePoint(95, 69);
+SW = makePoint(45, 113);
+SE = makePoint(95, 114);
+N = makePoint(70, 62);
+S = makePoint(70, 120);
+E = makePoint(95, 91);
+W = makePoint(40, 90);
+BuildButton = makePoint(30, 165);
+CancelButton = makePoint(85, 165);
 
 testMode = false; -- set to true to not use any boards, but just move grid and hit cancel button after each move
 counter = 1;
@@ -32,24 +32,19 @@ function doit()
         closePopUp();
 
 	elseif task == "guild" then
-        contributeGuild();
+       contributeGuild();
 	end
 
-lsPlaySound("complete.wav");
+    lsPlaySound("complete.wav");
 end
 
 
 function checkBuild()
   statusScreen("Clicking/Waiting on Build button", nil, 0.7, 0.7);
   srReadScreen();
-  BuildFlimsy = findText("Build a Flimsy Brick");
 
-  if BuildFlimsy then
-    clickText(BuildFlimsy);
-  else
-    error("Could not find Build a Flimsy Brick menu")
-  end
-
+    safeClick(960, 120);
+    
       while 1 do
         srReadScreen();
         buildButtonImage = srFindImage("build.png");
@@ -63,7 +58,6 @@ function checkBuild()
         end
       end --while
 end
-
 
 function PlaceMould()
 	--Build Row 2 Column 2
